@@ -94,10 +94,56 @@ class seqDataset(Dataset):
     def get_data(self, index):
         image_data = []
         h, w = self.image_size, self.image_size
-        # Thanks for your attention! After the paper accept, we will open the details soon.
+        file_name = self.img_idx[index] 
+        # print(file_name)
 
-        image_data = np.array(image_data) 
-        label_data = np.array(label_data, dtype=np.float32) 
+        label_data = self.anno_idx[index] 
+
+        image_id = int(file_name.split("/")[-1][:-4])  
+        image_path = file_name.replace(file_name.split("/")[-1], '') 
+        
+        idx_list = list(range(image_id - self.radius, image_id + self.radius + 1))
+        images_list = sorted(glob.glob(image_path + f'/*{self.suffix}'))
+
+        nfs = len(images_list)
+        idx_list = np.clip(idx_list, 0, nfs-1) 
+
+        for id in idx_list:
+            img = Image.open(image_path + str(id) + self.suffix)
+            # print(id, image_path + str(id) + self.suffix)
+            
+            img = cvtColor(img)
+            iw, ih = img.size
+            
+            scale = min(w/iw, h/ih)
+            nw = int(iw*scale)
+            nh = int(ih*scale)
+            dx = (w-nw)//2
+            dy = (h-nh)//2
+            
+            img = img.resize((nw, nh), Image.BICUBIC)  
+            new_img = Image.new('RGB', (w, h), (128, 128, 128)) 
+            new_img.paste(img, (dx, dy))  
+            image_data.append(np.array(new_img, np.float32))
+            
+        if len(label_data) > 0:
+            np.random.shuffle(label_data)  
+
+            label_data[:, [0, 2]] = label_data[:, [0, 2]]*nw/iw + dx  
+            label_data[:, [1, 3]] = label_data[:, [1, 3]]*nh/ih + dy
+            
+            label_data[:, 0:2][label_data[:, 0:2]<0] = 0
+            label_data[:, 2][label_data[:, 2]>w] = w
+            label_data[:, 3][label_data[:, 3]>h] = h
+            # discard invalid box
+            box_w = label_data[:, 2] - label_data[:, 0]
+            box_h = label_data[:, 3] - label_data[:, 1]
+            label_data = label_data[np.logical_and(box_w>1, box_h>1)] 
+
+        image_data = np.array(image_data) # (5, h, w, 3)
+        label_data = np.array(label_data, dtype=np.float32) # (1, 5)
+
+
         if self.aug is True:
             pass
             # image_data, label_data[:, :4] = augmentation(image_data, label_data[:, :4], h, w)
@@ -127,12 +173,3 @@ def dataset_collate(batch):
 
                 
             
-    
-if __name__ == "__main__":
-    train_dataset = seqDataset("/home/coco_train.txt", 256, 5, 'train')
-    train_dataloader = DataLoader(train_dataset, shuffle=True, batch_size=2, collate_fn=dataset_collate)
-    t = time.time()
-    for index, batch in enumerate(train_dataloader):
-        images, targets = batch[0], batch[1]
-        print(index)
-    print(time.time()-t)
