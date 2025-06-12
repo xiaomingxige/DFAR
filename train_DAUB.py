@@ -132,10 +132,10 @@ if __name__ == "__main__":
     #                   默认先冻结主干训练后解冻训练。
     #------------------------------------------------------------------#
     Init_Epoch          = 0
-    Freeze_Epoch        = 100
+    Freeze_Epoch        = 20
     Freeze_batch_size   = 4
 
-    UnFreeze_Epoch      = 100
+    UnFreeze_Epoch      = 20
     Unfreeze_batch_size = 4
     Freeze_Train        = False
     #------------------------------------------------------------------#
