@@ -12,7 +12,6 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, eval_callbac
     val_loss = 0
     
     # epoch_step = epoch_step // 5  # 每次epoch只随机用训练集合的一部分 防止过拟合
-    # epoch_step = 1  # 每次epoch只随机用训练集合的一部分 防止过拟合
 
 
     if local_rank == 0:
@@ -22,21 +21,18 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, eval_callbac
     for iteration, batch in enumerate(gen):
         if iteration >= epoch_step:
             break
-        images, targets = batch[0], batch[1]  # images: torch.Size([4, 3, 5, 512, 512]), targets[i].shape = torch.Size([1, 5])   i = 1, ..., 4
+        images, targets = batch[0], batch[1]  
         with torch.no_grad():
             if cuda:
                 images = images.cuda(local_rank)
                 targets = [ann.cuda(local_rank) for ann in targets]
         optimizer.zero_grad()
         if not fp16:  # not fp16 = True
-            # outputs, motionloss = model_train(images)
-            # yololoss = yolo_loss(outputs, targets)
-            # loss_value = yololoss + motionloss
-
-
-            outputs,_ = model_train(images)
+            outputs, motionloss = model_train(images)
             yololoss = yolo_loss(outputs, targets)
-            loss_value = yololoss
+            loss_value = yololoss + motionloss
+
+
 
             loss_value.backward()
             optimizer.step()
@@ -52,8 +48,7 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, eval_callbac
             ema.update(model_train)
         loss += loss_value.item()
         if local_rank == 0:
-            # pbar.set_postfix(**{'loss' : loss / (iteration + 1), 'yololoss' : yololoss.item(), 'motionloss' : motionloss.item(), 
-            pbar.set_postfix(**{'loss' : loss / (iteration + 1), 'yololoss' : yololoss.item(), 
+            pbar.set_postfix(**{'loss' : loss / (iteration + 1), 'yololoss' : yololoss.item(), 'motionloss' : motionloss.item(), 
                                 'lr'  : get_lr(optimizer)})
             pbar.update(1)
     if local_rank == 0:
