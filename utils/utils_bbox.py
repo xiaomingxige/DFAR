@@ -34,18 +34,18 @@ def yolo_correct_boxes(box_xy, box_wh, input_shape, image_shape, letterbox_image
 def decode_outputs(outputs, input_shape):
     grids   = []
     strides = []
-    hw      = [x.shape[-2:] for x in outputs]  # hw: [torch.Size([64, 64])]
+    hw      = [x.shape[-2:] for x in outputs]  
     
-    outputs = torch.cat([x.flatten(start_dim=2) for x in outputs], dim=2).permute(0, 2, 1)  # 1, 6, h, w --> 1, 6, h*w --> 1, h*w, 6
+    outputs = torch.cat([x.flatten(start_dim=2) for x in outputs], dim=2).permute(0, 2, 1)  
     #---------------------------------------------------#
     #   获得每一个特征点属于每一个种类的概率
     #---------------------------------------------------#
-    outputs[:, :, 4:] = torch.sigmoid(outputs[:, :, 4:])  # 前4维为reg_output, 随后一维为obj_output, 最后n维（这里为1）为cls_output
+    outputs[:, :, 4:] = torch.sigmoid(outputs[:, :, 4:]) 
     for h, w in hw:
         #---------------------------#
         #   根据特征层的高宽生成网格点
         #---------------------------#   
-        grid_y, grid_x  = torch.meshgrid([torch.arange(h), torch.arange(w)], indexing='ij')  # grid_y, grid_x: torch.Size([h, w]) torch.Size([h, w])
+        grid_y, grid_x  = torch.meshgrid([torch.arange(h), torch.arange(w)], indexing='ij')  
         
         #---------------------------#
         #   1, 6400, 2
@@ -65,8 +65,8 @@ def decode_outputs(outputs, input_shape):
     #
     #   1, 8400, 2
     #---------------------------#
-    grids               = torch.cat(grids, dim=1).type(outputs.type())  # b(1), h * w, 2
-    strides             = torch.cat(strides, dim=1).type(outputs.type())  # b(1), h * w, 1
+    grids               = torch.cat(grids, dim=1).type(outputs.type())  
+    strides             = torch.cat(strides, dim=1).type(outputs.type()) 
 
     #------------------------#
     #   根据网格点进行解码
