@@ -1,6 +1,6 @@
 ﻿
 # *DFAR*
-The PyTorch implementation for: Deformable Feature Alignment and Refinement for moving infrared small target detection.
+The PyTorch implementation for the DFAR: Deformable Feature Alignment and Refinement for moving infrared small target detection.
 ## 1. Pre-request
 ### 1.1. Environment
 ```bash
