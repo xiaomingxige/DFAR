@@ -60,4 +60,4 @@ If you find this project is useful for your research, please cite:
 python vid_predict.py
 ```
 ## Acknowledgements
-This work is based on [SSTNet](https://github.com/UESTC-nnLab/SSTNet). Thank [UESTC-nnLab](https://github.com/UESTC-nnLab) for sharing the codes.
+This work is based on [SSTNet](https://github.com/UESTC-nnLab/SSTNet) and [STDF-Pytoch](https://github.com/ryanxingql/stdf-pytorch). Thank [UESTC-nnLab](https://github.com/UESTC-nnLab) and [RyanXingQL](https://github.com/RyanXingQL) for sharing the codes.
