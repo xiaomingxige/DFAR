@@ -177,7 +177,7 @@ class EvalCallback():
 
             for annotation_line in tqdm(self.val_lines):
                 line        = annotation_line.split()
-                image_id    = line[0].split('/')[-2] + '-' + line[0].split('/')[-1][:-4] 
+                image_id    = line[0].split('/')[-2] + '-' + line[0].split('/')[-1][:-4]
   
                 #------------------------------#
                 #   读取图像
@@ -238,8 +238,21 @@ class EvalCallback():
 
 import glob
 def get_history_imgs(line, radius=2):  
-    # Thanks for your attention! After the paper accept, we will open the details soon.
+    dir_path = line.replace(line.split('/')[-1], '')  
+    file_type = line.split('.')[-1]  
+    index = int(line.split('/')[-1][:-4])  
+
+    images_list = sorted(glob.glob(dir_path + f'/*.{file_type}'))
+    nfs = len(images_list)
+
+    idx_list = list(range(index - radius, index + radius + 1))
+    idx_list = np.clip(idx_list, 0, nfs-1)
+
+    
     images = []
+    for id in idx_list:
+        # print(dir_path + str(id) + file_type)
+        images.append(dir_path + str(id) + '.' + file_type)
     return images
 
 
