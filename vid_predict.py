@@ -260,11 +260,6 @@ if __name__ == "__main__":
         # r_image.save(f"./save/{img_name}-gt.png")
 
 
-        
-
-
-
-
     elif mode == "video":
         import numpy as np
         from tqdm import tqdm

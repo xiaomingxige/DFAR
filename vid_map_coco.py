@@ -170,14 +170,6 @@ if __name__ == "__main__":
     print('cost of time:{:.2f}s'.format(time.time() - start_time))
 
 
-    """
-    CUDA_VISIBLE_DEVICES=0 python vid_map_coco.py 
-    
-
-    CUDA_VISIBLE_DEVICES=0 nohup python -u vid_map_coco.py > test_DUAB.out & 
-
-    CUDA_VISIBLE_DEVICES=0 nohup python -u vid_map_coco.py > test_IRDST.out & 
-    """
     print('PID:', os.getpid())
     if not os.path.exists(temp_save_path):
         os.makedirs(temp_save_path)
@@ -193,7 +185,7 @@ if __name__ == "__main__":
             results = []
 
             for image_id in tqdm(ids):
-                image_path = os.path.join(dataset_img_path, cocoGt.loadImgs(image_id)[0]['file_name'])  # cocoGt.loadImgs(image_id)如：[{'height': 256, 'width': 256, 'id': 1, 'file_name': 'images/test/data6/0.bmp'}]
+                image_path = os.path.join(dataset_img_path, cocoGt.loadImgs(image_id)[0]['file_name'])  
                 images = get_history_imgs(image_path)
                 images = [Image.open(item) for item in images]
 
@@ -204,7 +196,7 @@ if __name__ == "__main__":
 
     print('cost of time:{:.2f}s'.format(time.time() - start_time))
     if map_mode == 0 or map_mode == 2:
-        cocoDt = cocoGt.loadRes(os.path.join(temp_save_path, 'eval_results.json'))  # 生成
+        cocoDt = cocoGt.loadRes(os.path.join(temp_save_path, 'eval_results.json')) 
         cocoEval = COCOeval(cocoGt, cocoDt, 'bbox') 
         cocoEval.evaluate()
         cocoEval.accumulate()
@@ -222,11 +214,9 @@ if __name__ == "__main__":
         recalls = cocoEval.eval['recall']
         recall_50 = recalls[0, 0, 0, -1] # 第二为类别 (T,K,A,M)
 
-        # print(precision_50)
-        # print("Precision: %.4f, Recall: %.4f" %(np.mean(precision_50[:int(recall_50*100)]), recall_50))
+
         print("Precision: %.4f, Recall: %.4f, F1: %.4f" %(np.mean(precision_50[:int(recall_50*100)]), recall_50, 2*recall_50*np.mean(precision_50[:int(recall_50*100)])/( recall_50+np.mean(precision_50[:int(recall_50*100)]))))
         print("Get map done.")
-        # print(yolo.model_path)
         
 
         
@@ -249,4 +239,4 @@ if __name__ == "__main__":
 
 
         dataset_name = temp_save_path.split('_')[-1]
-        np.savetxt(f'./Ours_{dataset_name}.txt', precision_50, fmt='%s', newline=' ')  # 使用np.savetxt函数将数组保存为txt文件，数据格式为字符串（并不影响读取）
+        np.savetxt(f'./Ours_{dataset_name}.txt', precision_50, fmt='%s', newline=' ')  
