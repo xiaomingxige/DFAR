@@ -205,31 +205,7 @@ class Pred_vid(object):
             score           = top_conf[i]
 
 
-            # 真实: 98, 84, 106, 92
-            # print(box)  # [ 84.00028   97.921875  92.167595 106.055115]
-            # top, left, bottom, right = box
-
-
-            # # 真实: 53,47,61,55
-            # print(box)  # [ 88.70596  96.12964  96.785   104.16962]
-            # top, left, bottom, right = box
-            # # top, left, bottom, right = 47, 53, 55, 61
-
-
-            # 真实: 346,332,352,339
-            print(box)  # [ 88.70596  96.12964  96.785   104.16962]
             top, left, bottom, right = box
-            # top, left, bottom, right = 47, 53, 55, 61
-
-
-
-
-            # 真实: 420,290,427,297,0   
-            print(box)  # [ 88.70596  96.12964  96.785   104.16962]
-            top, left, bottom, right = box
-            # top, left, bottom, right = 290, 420, 297, 427
-
-
 
             top     = max(0, np.floor(top).astype('int32'))
             left    = max(0, np.floor(left).astype('int32'))
