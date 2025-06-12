@@ -8,8 +8,8 @@ conda create -n DFAR python=3.10.11
 conda activate DFAR
 conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cudatoolkit=11.3 -c pytorch
 
-git clone --depth=1 https://github.com/xiaomingxige/BIRD
-cd BIRD
+git clone --depth=1 https://github.com/xiaomingxige/DFAR
+cd DFAR
 pip install -r requirements.txt
 ```
 ### 1.2. DCNv2
