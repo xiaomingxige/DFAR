@@ -11,7 +11,7 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, eval_callbac
     loss = 0
     val_loss = 0
     
-    # epoch_step = epoch_step // 5  # 每次epoch只随机用训练集合的一部分 防止过拟合
+    # epoch_step = epoch_step // 5 
 
 
     if local_rank == 0:
