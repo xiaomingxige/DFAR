@@ -27,7 +27,7 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, eval_callbac
                 images = images.cuda(local_rank)
                 targets = [ann.cuda(local_rank) for ann in targets]
         optimizer.zero_grad()
-        if not fp16:  # not fp16 = True
+        if not fp16:  
             outputs, motionloss = model_train(images)
             yololoss = yolo_loss(outputs, targets)
             loss_value = yololoss + motionloss
