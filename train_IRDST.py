@@ -346,7 +346,6 @@ if __name__ == "__main__":
         # optimizer = optim.Adam(model.parameters())
 
         optimizer = optim.Adam(model.parameters(), lr=0.0001)
-        # print('yes')
 
         
         #---------------------------------------#
