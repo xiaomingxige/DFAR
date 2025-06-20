@@ -204,7 +204,7 @@ if __name__ == "__main__":
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)  # 新加
+    torch.cuda.manual_seed(seed) 
     torch.cuda.manual_seed_all(seed)
     torch.backends.cudnn.deterministic = True # speed up
     #torch.backends.cudnn.benchmark = False  # if reproduce
