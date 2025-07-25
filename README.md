@@ -45,13 +45,12 @@ python vid_map_coco.py
 If you find this project is useful for your research, please cite:
 
 ```bash
-@article{LUO2026111894,
+@article{LUO2025111894,
   title={Deformable Feature Alignment and Refinement for moving infrared small target detection},
   author={Luo, Dengyan and Xiang, Yanping and Wang, Hu and Ji, Luping and Li, Shuai and Ye, Mao},
   journal={Pattern Recognition},
   pages={111894},
-  year={2026},
-  issn={0031-3203},
+  year={2025},
   publisher={Elsevier}
 }
 ```
