@@ -28,7 +28,10 @@ python simple_check.py
 > The DCNv2 source files here is different from the [open-sourced version](https://github.com/chengdazhi/Deformable-Convolution-V2-PyTorch) due to incompatibility. [[issue]](https://github.com/open-mmlab/mmediting/issues/84#issuecomment-644974315)
 
 ### 1.3. Datasets
-Please follow [SSTNet](https://github.com/UESTC-nnLab/SSTNet) to download the datasets.
+Our experiments are conducted on two datasets: **DAUB** and **IRDST**.
+We would like to thank [SSTNet](https://github.com/UESTC-nnLab/SSTNet) for providing the datasets download links:
+- **DAUB**: [Download Link](https://pan.baidu.com/s/1nNTvjgDaEAQU7tqQjPZGrw?pwd=saew) (Extraction Code: saew)
+- **IRDST**: [Download Link](https://pan.baidu.com/s/1igjIT30uqfCKjLbmsMfoFw?pwd=rrnr) (Extraction Code: rrnr)
 ## 2. Train
 ```bash
 CUDA_VISIBLE_DEVICES=1 nohup python -u train.py > nohup.out &
