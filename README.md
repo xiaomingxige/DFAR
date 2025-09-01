@@ -43,6 +43,10 @@ We utilize 1 NVIDIA GeForce RTX 3090 GPU for testing：
 ```bash
 python vid_map_coco.py
 ```
+## 4. Visualization
+```bash
+python vid_predict.py
+```
 
 ## Citation
 If you find this project is useful for your research, please cite:
@@ -58,9 +62,6 @@ If you find this project is useful for your research, please cite:
 }
 ```
 
-## 4. Visualization
-```bash
-python vid_predict.py
-```
+
 ## Acknowledgements
 This work is based on [SSTNet](https://github.com/UESTC-nnLab/SSTNet) and [STDF-Pytoch](https://github.com/ryanxingql/stdf-pytorch). Thank [UESTC-nnLab](https://github.com/UESTC-nnLab) and [RyanXingQL](https://github.com/RyanXingQL) for sharing the codes.
