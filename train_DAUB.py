@@ -24,12 +24,6 @@ from utils.utils_fit import fit_one_epoch
 3、训练好的权值文件保存在logs文件夹中，每个训练世代（Epoch）包含若干训练步长（Step），每个训练步长（Step）进行一次梯度下降。
 '''
 if __name__ == "__main__":
-    print('PID: ', os.getpid())
-    """
-    CUDA_VISIBLE_DEVICES=1 python train_DAUB.py
-    CUDA_VISIBLE_DEVICES=1 nohup python -u train_DAUB.py > nohup_DUAB.out & 
-    """
-    DATA_PATH = "./DAUB/images/"
     train_annotation_path = './DAUB/my_coco_train_DAUB.txt'
     val_annotation_path = './DAUB/my_coco_val_DAUB.txt'
     print('train_annotation_path: ', train_annotation_path)

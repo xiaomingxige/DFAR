@@ -36,7 +36,6 @@ We would like to thank [SSTNet](https://github.com/UESTC-nnLab/SSTNet) for provi
 ```bash
 CUDA_VISIBLE_DEVICES=0 nohup python -u train.py > nohup.out &
 ```
-> Please modify the corresponding file path in train.py before training.
 ## 3. Test
 We utilize 1 NVIDIA GeForce RTX 3090 GPU for testing：
 
