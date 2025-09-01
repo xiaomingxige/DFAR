@@ -34,7 +34,7 @@ We would like to thank [SSTNet](https://github.com/UESTC-nnLab/SSTNet) for provi
 - **IRDST**: [Download Link](https://pan.baidu.com/s/1igjIT30uqfCKjLbmsMfoFw?pwd=rrnr) (Extraction Code: rrnr)
 ## 2. Train
 ```bash
-CUDA_VISIBLE_DEVICES=1 nohup python -u train.py > nohup.out &
+CUDA_VISIBLE_DEVICES=0 nohup python -u train.py > nohup.out &
 ```
 > Please modify the corresponding file path in train.py before training.
 ## 3. Test
