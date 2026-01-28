@@ -51,12 +51,13 @@ python vid_predict.py
 If you find this project is useful for your research, please cite:
 
 ```bash
-@article{LUO2025111894,
+@article{luo2026deformable,
   title={Deformable Feature Alignment and Refinement for moving infrared small target detection},
   author={Luo, Dengyan and Xiang, Yanping and Wang, Hu and Ji, Luping and Li, Shuai and Ye, Mao},
   journal={Pattern Recognition},
+  volume={169},
   pages={111894},
-  year={2025},
+  year={2026},
   publisher={Elsevier}
 }
 ```
